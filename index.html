@@ -10,7 +10,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .calendar-day { min-height: 90px; }
-        /* Tema Hutan Pinus */
         body {
             background-color: #f4f7f4;
             background-image: radial-gradient(#d1e7dd 0.75px, transparent 0.75px);
@@ -43,14 +42,11 @@
         <!-- TAB 1: FORM PENDAFTARAN & BROSUR -->
         <section id="tab-form" class="space-y-8">
             
-            <!-- Bagian Tampilan Brosur Langsung (Tanpa Login Google Drive) -->
             <div class="bg-gradient-to-br from-emerald-900 to-stone-900 text-white rounded-2xl shadow-xl p-6 md:p-8 border-2 border-emerald-600">
                 <div class="flex flex-col lg:flex-row gap-8 items-center">
                     
-                    <!-- Preview Gambar Brosur dari Google Drive (Direct Embed) -->
                     <div class="w-full lg:w-5/12 flex flex-col items-center">
                         <div class="w-full rounded-2xl overflow-hidden shadow-2xl border-4 border-amber-400 bg-stone-900 relative group">
-                            <!-- Link Direct Preview Google Drive -->
                             <iframe src="https://drive.google.com/file/d/1zDbKkLKSWZclICCTC2rGbMo0wo4A8lnk/preview" class="w-full h-96 md:h-[450px] border-0" allow="autoplay"></iframe>
                         </div>
                         <a href="https://drive.google.com/file/d/1zDbKkLKSWZclICCTC2rGbMo0wo4A8lnk/view?usp=drivesdk" target="_blank" class="mt-4 inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-stone-950 text-xs font-black py-2.5 px-5 rounded-xl shadow-lg transition transform hover:-translate-y-0.5">
@@ -58,7 +54,6 @@
                         </a>
                     </div>
 
-                    <!-- Informasi & Detail Buper -->
                     <div class="w-full lg:w-7/12 space-y-4">
                         <div class="inline-flex items-center gap-2 bg-emerald-800 text-emerald-200 text-xs px-3 py-1 rounded-full uppercase tracking-wider font-extrabold border border-emerald-600">
                             <span>🌲 Pilihan Utama Camping Edukasi</span>
@@ -88,7 +83,6 @@
                 </div>
             </div>
 
-            <!-- Form Pendaftaran / Booking -->
             <div class="bg-white rounded-2xl shadow-xl p-6 md:p-10 max-w-3xl mx-auto border border-stone-200 relative overflow-hidden">
                 <div class="absolute top-0 right-0 transform translate-x-6 -translate-y-6 text-7xl opacity-10 pointer-events-none">⛺🌲</div>
                 
@@ -153,7 +147,7 @@
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-stone-700 uppercase mb-1">6. Pembayaran DP (Rupiah)</label>
-                            <input type="number" id="dp" placeholder="Contoh: 150000" class="w-full px-4 py-2.5 bg-stone-50 border border-stone-300 rounded-xl focus:ring-2 focus:ring-emerald-600 outline-none text-sm font-medium">
+                            <input type="number" id="dp" placeholder="Contoh: 300000" class="w-full px-4 py-2.5 bg-stone-50 border border-stone-300 rounded-xl focus:ring-2 focus:ring-emerald-600 outline-none text-sm font-medium">
                         </div>
                     </div>
 
@@ -193,7 +187,6 @@
                 <div class="flex flex-col lg:flex-row justify-between items-center gap-4 border-b pb-4">
                     <h2 class="text-xl font-black text-emerald-900" id="calendarMonthTitle">Kalender Jadwal Perkemahan</h2>
                     
-                    <!-- Filter Zona Kalender -->
                     <div class="flex items-center gap-2 flex-wrap justify-center">
                         <span class="text-xs font-bold text-stone-600">Filter Zona:</span>
                         <select id="zoneFilterSelect" onchange="renderCalendar()" class="px-3 py-2 bg-stone-50 border border-stone-300 rounded-xl text-xs font-bold text-emerald-900 focus:ring-2 focus:ring-emerald-600 outline-none">
@@ -211,14 +204,12 @@
                     </div>
                 </div>
 
-                <!-- Keterangan Warna Legend -->
                 <div class="flex flex-wrap items-center gap-4 text-xs font-semibold bg-stone-50 p-3 rounded-xl border border-stone-200">
                     <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-full bg-amber-500 inline-block"></span> Someday (Check-in & Out Hari Sama)</span>
                     <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-full bg-emerald-600 inline-block"></span> Jadwal Aktif / Mulai</span>
                     <span class="flex items-center gap-1.5"><span class="w-3.5 h-3.5 rounded-full bg-blue-500 inline-block"></span> Tanggal Selesai (Check-out)</span>
                 </div>
 
-                <!-- Grid Kalender -->
                 <div class="grid grid-cols-7 gap-1.5 text-center font-bold text-stone-600 text-xs mb-2">
                     <div class="text-red-600">Min</div><div>Sen</div><div>Sel</div><div>Rab</div><div>Kam</div><div>Jum</div><div class="text-emerald-700">Sab</div>
                 </div>
@@ -469,7 +460,7 @@
                 zona: selectedZona.join(', '),
                 jumlahPeserta,
                 dp,
-                alat: selectedAlat.join(', ') || '-',
+                alat: selectedAlat.join(', ') || 'Tidak ada sewa tambahan',
                 createdAt: new Date().toISOString()
             })
             .then(() => {
@@ -488,7 +479,6 @@
         const bookingsRef = ref(db, 'bookings');
         onValue(bookingsRef, (snapshot) => {
             const data = snapshot.val();
-            // PERBAIKAN: Mengatasi nilai null pada database agar tidak crash
             globalBookings = data ? data : {};
             renderCalendar();
             renderAdminDashboard();
@@ -668,6 +658,7 @@
                     }
                 }
 
+                // PERBAIKAN: Tombol WhatsApp mengirim template format konfirmasi reservasi
                 tbody.innerHTML += `
                     <tr class="border-b hover:bg-stone-50 text-xs">
                         <td class="p-3">
@@ -685,7 +676,7 @@
                             <span class="text-stone-500">Alat: ${b.alat}</span>
                         </td>
                         <td class="p-3 text-center space-x-1">
-                            <button onclick="waConfirm('${b.noTelepon}', '${b.namaSekolah}', '${b.tglMulai}')" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold" title="WhatsApp">💬 WA</button>
+                            <button onclick='waConfirm("${b.noTelepon}", ${JSON.stringify(b)})' class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold" title="Kirim Konfirmasi WA">💬 WA</button>
                             <button onclick="openEditModal('${id}')" class="px-2.5 py-1 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-bold" title="Edit">✏️</button>
                             <button onclick="deleteBooking('${id}')" class="px-2.5 py-1 bg-red-600 hover:bg-red-700 text-white rounded-lg font-bold" title="Hapus">🗑️</button>
                         </td>
@@ -701,14 +692,36 @@
             updateDonutChart(zoneCounts);
         }
 
-        window.waConfirm = function(phone, sekolah, tgl) {
+        window.waConfirm = function(phone, b) {
             if(phone === 'kosong' || !phone) {
                 alert("Nomor telepon tidak tersedia atau diisi 'kosong'.");
                 return;
             }
             let cleanPhone = phone.replace(/\D/g,'');
             if(cleanPhone.startsWith('0')) cleanPhone = '62' + cleanPhone.slice(1);
-            const message = encodeURIComponent(`Halo, salam dari BUPER TALAGA PANCAR. Kami ingin mengkonfirmasi ulang jadwal booking perkemahan untuk sekolah ${sekolah} pada tanggal ${tgl}. Apakah ada perubahan? Terima kasih.`);
+
+            // Membuat format pesan persis seperti contoh yang diminta
+            const message = encodeURIComponent(
+`*KONFIRMASI RESERVASI BUPER TALAGA PANCAR* 🌲
+
+Halo *${b.namaSekolah}*,
+Berikut adalah rincian pendaftaran perkemahan Anda:
+
+📌 *Status Pendaftaran:* Dikonfirmasi
+⛺ *Zona Perkemahan:* ${b.zona}
+📅 *Tanggal:* ${b.tglMulai} s.d. ${b.tglKeluar}
+👥 *Jumlah Peserta:* ±${b.jumlahPeserta} Orang
+💰 *Informasi DP:* ${b.dp || 0}
+
+📦 *Rincian Sewa Alat / Fasilitas:*
+  • ${b.alat || 'Tidak ada sewa tambahan'}
+
+Mohon periksa kembali rincian di atas. Jika ada penyesuaian atau pertanyaan lebih lanjut, silakan balas pesan ini.
+
+Terima kasih! 🙏
+_Salam, Pengelola Bumi Perkemahan Talaga Pancar_`
+            );
+
             window.open(`https://wa.me/${cleanPhone}?text=${message}`, '_blank');
         }
 
