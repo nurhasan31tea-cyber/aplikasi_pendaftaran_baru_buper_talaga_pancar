@@ -252,42 +252,66 @@
         </header>
 
         <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- DIAGRAM DONAT DIPERBARUI LEBIH LENGKAP & MENARIK -->
-                <div class="bg-stone-100 p-6 rounded-2xl shadow-xl border border-stone-400 flex flex-col items-center">
-                    <div class="w-full flex justify-between items-center mb-4">
-                        <h3 class="font-black text-sm text-stone-700">Distribusi Peminat Berdasarkan Zona</h3>
-                        <span class="text-[10px] bg-emerald-800 text-white px-2.5 py-1 rounded-full font-bold shadow-xs">Akumulasi Peserta</span>
-                    </div>
-                    <div class="w-full h-64 relative flex items-center justify-center">
-                        <canvas id="zoneChart"></canvas>
-                    </div>
-                    <p class="text-[11px] text-stone-500 mt-4 text-center">Menampilkan perbandingan total peserta yang memilih masing-masing zona camping.</p>
+            <!-- STATISTIK KARTU RINGKASAN -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-emerald-50/90 p-4 rounded-xl border border-emerald-200 shadow-sm text-center">
+                    <span class="block text-2xl font-black text-emerald-800" id="statHarian">0</span>
+                    <span class="text-[11px] text-stone-600 font-bold uppercase">Peserta Harian</span>
                 </div>
-
-                <div class="bg-stone-100 p-6 rounded-2xl shadow-xl border border-stone-400 space-y-4 flex flex-col justify-between">
-                    <h3 class="font-black text-sm text-stone-700">Ringkasan Pengunjung Realtime (Total Peserta)</h3>
-                    <div class="grid grid-cols-2 gap-4 text-center">
-                        <div class="bg-emerald-50/90 p-4 rounded-xl border border-emerald-200 shadow-sm">
-                            <span class="block text-2xl font-black text-emerald-800" id="statHarian">0</span>
-                            <span class="text-[11px] text-stone-600 font-bold uppercase">Harian</span>
-                        </div>
-                        <div class="bg-blue-50/90 p-4 rounded-xl border border-blue-200 shadow-sm">
-                            <span class="block text-2xl font-black text-blue-800" id="statMingguan">0</span>
-                            <span class="text-[11px] text-stone-600 font-bold uppercase">Mingguan</span>
-                        </div>
-                        <div class="bg-amber-50/90 p-4 rounded-xl border border-amber-200 shadow-sm">
-                            <span class="block text-2xl font-black text-amber-800" id="statBulanan">0</span>
-                            <span class="text-[11px] text-stone-600 font-bold uppercase">Bulanan</span>
-                        </div>
-                        <div class="bg-purple-50/90 p-4 rounded-xl border border-purple-200 shadow-sm">
-                            <span class="block text-2xl font-black text-purple-800" id="statTahunan">0</span>
-                            <span class="text-[11px] text-stone-600 font-bold uppercase">Tahunan</span>
-                        </div>
-                    </div>
+                <div class="bg-blue-50/90 p-4 rounded-xl border border-blue-200 shadow-sm text-center">
+                    <span class="block text-2xl font-black text-blue-800" id="statMingguan">0</span>
+                    <span class="text-[11px] text-stone-600 font-bold uppercase">Peserta Mingguan</span>
+                </div>
+                <div class="bg-amber-50/90 p-4 rounded-xl border border-amber-200 shadow-sm text-center">
+                    <span class="block text-2xl font-black text-amber-800" id="statBulanan">0</span>
+                    <span class="text-[11px] text-stone-600 font-bold uppercase">Peserta Bulanan</span>
+                </div>
+                <div class="bg-purple-50/90 p-4 rounded-xl border border-purple-200 shadow-sm text-center">
+                    <span class="block text-2xl font-black text-purple-800" id="statTahunan">0</span>
+                    <span class="text-[11px] text-stone-600 font-bold uppercase">Peserta Tahunan</span>
                 </div>
             </div>
 
+            <!-- GRID GRAFIK ANALISIS -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- 1. DIAGRAM DONAT DISTRIBUSI ZONA -->
+                <div class="bg-stone-100 p-6 rounded-2xl shadow-xl border border-stone-400 flex flex-col items-center">
+                    <div class="w-full flex justify-between items-center mb-4">
+                        <h3 class="font-black text-sm text-stone-700">Donat Proporsi Zona</h3>
+                        <span class="text-[10px] bg-emerald-800 text-white px-2.5 py-1 rounded-full font-bold shadow-xs">Dibagi Rata</span>
+                    </div>
+                    <div class="w-full h-56 relative flex items-center justify-center">
+                        <canvas id="zoneChart"></canvas>
+                    </div>
+                    <p class="text-[11px] text-stone-500 mt-4 text-center">Proporsi persentase peserta per zona perkemahan.</p>
+                </div>
+
+                <!-- 2. DIAGRAM BATANG PESERTA TIAP ZONA -->
+                <div class="bg-stone-100 p-6 rounded-2xl shadow-xl border border-stone-400 flex flex-col items-center">
+                    <div class="w-full flex justify-between items-center mb-4">
+                        <h3 class="font-black text-sm text-stone-700">Grafik Peserta Tiap Zona</h3>
+                        <span class="text-[10px] bg-blue-800 text-white px-2.5 py-1 rounded-full font-bold shadow-xs">Total Siswa</span>
+                    </div>
+                    <div class="w-full h-56 relative flex items-center justify-center">
+                        <canvas id="zoneBarChart"></canvas>
+                    </div>
+                    <p class="text-[11px] text-stone-500 mt-4 text-center">Jumlah riil siswa per zona (pembagian proporsional).</p>
+                </div>
+
+                <!-- 3. DIAGRAM SEKOLAH TERBANYAK & TERSEDIKIT -->
+                <div class="bg-stone-100 p-6 rounded-2xl shadow-xl border border-stone-400 flex flex-col items-center">
+                    <div class="w-full flex justify-between items-center mb-4">
+                        <h3 class="font-black text-sm text-stone-700">Grafik Peringkat Sekolah</h3>
+                        <span class="text-[10px] bg-amber-700 text-white px-2.5 py-1 rounded-full font-bold shadow-xs">Ranking Peserta</span>
+                    </div>
+                    <div class="w-full h-56 relative flex items-center justify-center">
+                        <canvas id="schoolBarChart"></canvas>
+                    </div>
+                    <p class="text-[11px] text-stone-500 mt-4 text-center">Perbandingan jumlah peserta antar sekolah.</p>
+                </div>
+            </div>
+
+            <!-- TABEL DATABASE PENDAFTARAN -->
             <div class="bg-stone-100 rounded-2xl shadow-xl p-6 border border-stone-400 space-y-4">
                 <div class="flex justify-between items-center">
                     <h3 class="font-black text-base text-emerald-900">Daftar Seluruh Pendaftaran (Realtime Database)</h3>
@@ -393,6 +417,8 @@
         let currentYear = new Date().getFullYear();
         let currentMonth = new Date().getMonth();
         let zoneChartInstance = null;
+        let zoneBarChartInstance = null;
+        let schoolBarChartInstance = null;
 
         window.switchTab = function(tabName) {
             if(tabName === 'form') {
@@ -620,11 +646,12 @@
 
             if(keys.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-stone-500">Belum ada data pendaftaran.</td></tr>`;
-                updateDonutChart({ "ZONA A": 0, "ZONA B": 0, "ZONA C": 0, "ZONA D(wisata)": 0 });
+                updateCharts({ "ZONA A": 0, "ZONA B": 0, "ZONA C": 0, "ZONA D(wisata)": 0 }, {});
                 return;
             }
 
             let zoneCounts = { "ZONA A": 0, "ZONA B": 0, "ZONA C": 0, "ZONA D(wisata)": 0 };
+            let schoolParticipantMap = {};
             let statHarianVal = 0, statMingguanVal = 0, statBulananVal = 0, statTahunanVal = 0;
             const now = new Date();
 
@@ -632,29 +659,42 @@
                 const b = globalBookings[id];
                 if(!b) return;
                 
+                const totalPesertaBooking = parseInt(b.jumlahPeserta) || 0;
+                
+                // PENGHITUNGAN BAGI RATA PESERTA KE TIAP ZONA
                 if(b.zona) {
-                    b.zona.split(',').forEach(z => {
-                        let cleanedZ = z.trim();
-                        if(zoneCounts[cleanedZ] !== undefined) {
-                            zoneCounts[cleanedZ] += parseInt(b.jumlahPeserta) || 0;
-                        }
-                    });
+                    const zonesArray = b.zona.split(',').map(z => z.trim());
+                    const validZones = zonesArray.filter(z => zoneCounts[z] !== undefined);
+                    if(validZones.length > 0) {
+                        const splitCount = totalPesertaBooking / validZones.length;
+                        validZones.forEach(z => {
+                            zoneCounts[z] += splitCount;
+                        });
+                    }
+                }
+
+                // AKUMULASI PESERTA PER SEKOLAH
+                if(b.namaSekolah) {
+                    if(!schoolParticipantMap[b.namaSekolah]) {
+                        schoolParticipantMap[b.namaSekolah] = 0;
+                    }
+                    schoolParticipantMap[b.namaSekolah] += totalPesertaBooking;
                 }
 
                 const startDate = new Date(b.tglMulai);
                 if(!isNaN(startDate)) {
                     if(startDate.getFullYear() === now.getFullYear()) {
-                        statTahunanVal += parseInt(b.jumlahPeserta) || 0;
+                        statTahunanVal += totalPesertaBooking;
                         if(startDate.getMonth() === now.getMonth()) {
-                            statBulananVal += parseInt(b.jumlahPeserta) || 0;
+                            statBulananVal += totalPesertaBooking;
                             if(startDate.toDateString() === now.toDateString()) {
-                                statHarianVal += parseInt(b.jumlahPeserta) || 0;
+                                statHarianVal += totalPesertaBooking;
                             }
                         }
                         const diffTime = startDate - now;
                         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                         if(diffDays >= 0 && diffDays <= 7) {
-                            statMingguanVal += parseInt(b.jumlahPeserta) || 0;
+                            statMingguanVal += totalPesertaBooking;
                         }
                     }
                 }
@@ -689,7 +729,7 @@
             document.getElementById('statBulanan').textContent = statBulananVal;
             document.getElementById('statTahunan').textContent = statTahunanVal;
 
-            updateDonutChart(zoneCounts);
+            updateCharts(zoneCounts, schoolParticipantMap);
         }
 
         window.waConfirm = function(phone, b) {
@@ -775,7 +815,7 @@ _Salam, Pengelola Bumi Perkemahan Talaga Pancar_`
             .catch(err => alert("Gagal memperbarui: " + err.message));
         });
 
-        // Plugin Kustom Chart.js untuk menampilkan total di tengah Donut Chart secara akurat & menarik
+        // Plugin Kustom Chart.js untuk Donut Chart
         const centerTextPlugin = {
             id: 'centerTextPlugin',
             afterDraw(chart) {
@@ -783,71 +823,107 @@ _Salam, Pengelola Bumi Perkemahan Talaga Pancar_`
                 ctx.save();
                 const total = chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
                 
-                ctx.font = "bold 18px sans-serif";
-                ctx.fillStyle = "#064e3b"; // emerald-900
+                ctx.font = "bold 16px sans-serif";
+                ctx.fillStyle = "#064e3b";
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
-                ctx.fillText(total + " Orang", width / 2, height / 2 - 8);
+                ctx.fillText(Math.round(total) + " Orang", width / 2, height / 2 - 8);
 
-                ctx.font = "11px sans-serif";
-                ctx.fillStyle = "#78716c"; // stone-500
-                ctx.fillText("Total Peserta", width / 2, height / 2 + 12);
+                ctx.font = "10px sans-serif";
+                ctx.fillStyle = "#78716c";
+                ctx.fillText("Akumulasi", width / 2, height / 2 + 10);
                 ctx.restore();
             }
         };
 
-        function updateDonutChart(counts) {
-            const ctx = document.getElementById('zoneChart').getContext('2d');
-            if(zoneChartInstance) {
-                zoneChartInstance.destroy();
-            }
+        function updateCharts(counts, schoolMap) {
+            // 1. DONUT CHART
+            const ctxDonut = document.getElementById('zoneChart').getContext('2d');
+            if(zoneChartInstance) zoneChartInstance.destroy();
             
             const dataValues = [counts['ZONA A'], counts['ZONA B'], counts['ZONA C'], counts['ZONA D(wisata)']];
 
-            zoneChartInstance = new Chart(ctx, {
+            zoneChartInstance = new Chart(ctxDonut, {
                 type: 'doughnut',
                 data: {
                     labels: ['ZONA A', 'ZONA B', 'ZONA C', 'ZONA D (Wisata)'],
                     datasets: [{
                         data: dataValues,
-                        backgroundColor: [
-                            '#047857', // Emerald 700 (Kontras & Menarik)
-                            '#059669', // Emerald 600
-                            '#10b981', // Emerald 500
-                            '#34d399'  // Emerald 400
-                        ],
+                        backgroundColor: ['#047857', '#059669', '#10b981', '#34d399'],
                         borderWidth: 2,
                         borderColor: '#f5f5f4',
-                        hoverOffset: 6
+                        hoverOffset: 4
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    cutout: '70%', // Membuat bentuk donat lebih elegan
+                    cutout: '70%',
                     plugins: {
-                        legend: { 
-                            position: 'bottom', 
-                            labels: { 
-                                boxWidth: 14, 
-                                padding: 15,
-                                font: { size: 11, weight: 'bold' },
-                                color: '#292524'
-                            } 
-                        },
+                        legend: { position: 'bottom', labels: { boxWidth: 10, padding: 8, font: { size: 10, weight: 'bold' } } },
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
                                     const val = context.raw || 0;
                                     const total = context.dataset.data.reduce((a, b) => a + b, 0);
                                     const percentage = total > 0 ? ((val / total) * 100).toFixed(1) : 0;
-                                    return ` ${val} Orang (${percentage}%)`;
+                                    return ` ${val.toFixed(1)} Orang (${percentage}%)`;
                                 }
                             }
                         }
                     }
                 },
                 plugins: [centerTextPlugin]
+            });
+
+            // 2. BAR CHART ZONA
+            const ctxBarZona = document.getElementById('zoneBarChart').getContext('2d');
+            if(zoneBarChartInstance) zoneBarChartInstance.destroy();
+
+            zoneBarChartInstance = new Chart(ctxBarZona, {
+                type: 'bar',
+                data: {
+                    labels: ['ZONA A', 'ZONA B', 'ZONA C', 'Zona D'],
+                    datasets: [{
+                        label: 'Jumlah Siswa',
+                        data: dataValues,
+                        backgroundColor: '#059669',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+
+            // 3. BAR CHART SEKOLAH (TERBANYAK & TERSEDIKIT)
+            const ctxSchool = document.getElementById('schoolBarChart').getContext('2d');
+            if(schoolBarChartInstance) schoolBarChartInstance.destroy();
+
+            const sortedSchools = Object.entries(schoolMap).sort((a, b) => b[1] - a[1]);
+            const schoolLabels = sortedSchools.map(item => item[0]);
+            const schoolValues = sortedSchools.map(item => item[1]);
+
+            schoolBarChartInstance = new Chart(ctxSchool, {
+                type: 'bar',
+                data: {
+                    labels: schoolLabels.length > 0 ? schoolLabels : ['Belum Ada Data'],
+                    datasets: [{
+                        label: 'Jumlah Peserta',
+                        data: schoolValues.length > 0 ? schoolValues : [0],
+                        backgroundColor: '#d97706', // Amber
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
             });
         }
     </script>
