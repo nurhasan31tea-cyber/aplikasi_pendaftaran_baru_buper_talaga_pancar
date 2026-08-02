@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Booking Kalender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .booking-list {
+            margin-top: 30px;
+        }
+        .booking-item {
+            background: #ecf0f1;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Form Booking Kalender</h2>
+    <form id="bookingForm">
+        <div class="form-group">
+            <label for="nama">Nama Pemesan:</label>
+            <input type="text" id="nama" required placeholder="Masukkan nama Anda">
+        </div>
+        <div class="form-group">
+            <label for="tanggal">Tanggal Booking:</label>
+            <input type="date" id="tanggal" required>
+        </div>
+        <div class="form-group">
+            <label for="jam">Jam Booking:</label>
+            <input type="time" id="jam" required>
+        </div>
+        <button type="submit">Simpan Booking</button>
+    </form>
+
+    <div class="booking-list">
+        <h3>Daftar Booking Terdaftar:</h3>
+        <div id="listContainer">Memuat data...</div>
+    </div>
+</div>
+
+<!-- Firebase SDK dan Logika Aplikasi -->
+<script type="module">
+    // Import fungsi yang diperlukan dari SDK Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-analytics.js";
+    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-database.js";
+
+    // Konfigurasi Firebase Anda
+    const firebaseConfig = {
+        apiKey: "AIzaSyA4vpTutrVaSFbaGVVyqLejbQvNKzPtvCk",
+        authDomain: "aplikasi-booking-kalender.firebaseapp.com",
+        databaseURL: "https://aplikasi-booking-kalender-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "aplikasi-booking-kalender",
+        storageBucket: "aplikasi-booking-kalender.appspot.com",
+        messagingSenderId: "964123373228",
+        appId: "1:964123373228:web:c026c14308dbaa02237909",
+        measurementId: "G-BRZMWE29R0"
+    };
+
+    // Inisialisasi Firebase & Analytics
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getDatabase(app);
+
+    // Tangani Pengiriman Form Booking
+    const bookingForm = document.getElementById("bookingForm");
+    bookingForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const nama = document.getElementById("nama").value;
+        const tanggal = document.getElementById("tanggal").value;
+        const jam = document.getElementById("jam").value;
+
+        // Referensi ke database Realtime Database (path: /bookings)
+        const bookingsRef = ref(db, 'bookings');
+        
+        push(bookingsRef, {
+            nama: nama,
+            tanggal: tanggal,
+            jam: jam,
+            createdAt: new Date().toISOString()
+        })
+        .then(() => {
+            alert("Booking berhasil disimpan!");
+            bookingForm.reset();
+        })
+        .catch((error) => {
+            alert("Gagal menyimpan booking: " + error.message);
+        });
+    });
+
+    // Ambil dan Tampilkan Data Secara Realtime
+    const listContainer = document.getElementById("listContainer");
+    const bookingsRef = ref(db, 'bookings');
+
+    onValue(bookingsRef, (snapshot) => {
+        const data = snapshot.val();
+        listContainer.innerHTML = "";
+
+        if (!data) {
+            listContainer.innerHTML = "<p>Belum ada jadwal booking.</p>";
+            return;
+        }
+
+        let html = "";
+        for (let id in data) {
+            const item = data[id];
+            html += `
+                <div class="booking-item">
+                    <div>
+                        <strong>${item.nama}</strong><br>
+                        <small>📅 ${item.tanggal} | ⏰ ${item.jam}</small>
+                    </div>
+                </div>
+            `;
+        }
+        listContainer.innerHTML = html;
+    });
+</script>
+
+</body>
+</html>
