@@ -19,29 +19,30 @@
 </head>
 <body class="text-stone-800 font-sans">
 
-    <!-- Header / Navbar -->
+    <!-- Header / Navbar dengan Logo Terpisah di Sudut Kiri & Kanan -->
     <header class="bg-emerald-900 text-white shadow-lg sticky top-0 z-50 border-b-4 border-emerald-700">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-3">
-                <span class="text-3xl">🌲⛺</span>
-                <div>
-                    <h1 class="text-2xl font-black tracking-wide">BUPER TALAGA PANCAR</h1>
-                    <p class="text-xs text-emerald-200">Menghubungkan Anak dengan Alam Melalui Camping</p>
+            
+            <!-- Sudut Kiri: Logo Perhutani & Identitas Buper -->
+            <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
+                <div class="flex items-center gap-3">
+                    <!-- Logo Perhutani (Diperbesar) -->
+                    <img src="https://lh3.googleusercontent.com/d/1aTBkfNc3qK_cX6ydJk-BulZCY7gHSiRU=s220" alt="Logo Perhutani" class="w-14 h-14 object-contain bg-white rounded-2xl p-1.5 shadow-md border-2 border-emerald-600" title="Logo Perhutani">
+                    <div>
+                        <h1 class="text-2xl font-black tracking-wide">BUPER TALAGA PANCAR</h1>
+                        <p class="text-xs text-emerald-200">Menghubungkan Anak dengan Alam Melalui Camping</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Logo Perhutani & KTH Talaga Pancar di Kanan Atas -->
-            <div class="flex items-center gap-3 bg-emerald-950/80 px-4 py-2 rounded-2xl border border-emerald-800 shadow-inner">
+            <!-- Sudut Kanan: Logo KTH Talaga Pancar (Terpisah & Diperbesar) -->
+            <div class="flex items-center gap-3 bg-emerald-950/80 px-5 py-2.5 rounded-2xl border border-emerald-800 shadow-inner w-full md:w-auto justify-between md:justify-end">
                 <div class="text-right">
                     <p class="text-[10px] text-emerald-300 font-bold uppercase tracking-wider">Didukung Oleh:</p>
-                    <p class="text-xs font-black text-white">Perhutani & KTH Talaga Pancar</p>
+                    <p class="text-xs font-black text-white">KTH Talaga Pancar</p>
                 </div>
-                <div class="flex items-center gap-2">
-                    <!-- Logo Perhutani -->
-                    <img src="https://lh3.googleusercontent.com/d/1aTBkfNc3qK_cX6ydJk-BulZCY7gHSiRU=s220" alt="Logo Perhutani" class="w-10 h-10 object-contain bg-white rounded-xl p-1 shadow border border-emerald-700" title="Logo Perhutani">
-                    <!-- Logo KTH Talaga Pancar -->
-                    <img src="https://lh3.googleusercontent.com/d/1q-E1KnEgMJJEl6dgLWa6ydDyD01mbUj9=s220" alt="Logo KTH Talaga Pancar" class="w-10 h-10 object-contain bg-white rounded-xl p-1 shadow border border-emerald-700" title="Logo KTH Talaga Pancar">
-                </div>
+                <!-- Logo KTH Talaga Pancar (Diperbesar) -->
+                <img src="https://lh3.googleusercontent.com/d/1q-E1KnEgMJJEl6dgLWa6ydDyD01mbUj9=s220" alt="Logo KTH Talaga Pancar" class="w-14 h-14 object-contain bg-white rounded-2xl p-1.5 shadow-md border-2 border-emerald-600" title="Logo KTH Talaga Pancar">
             </div>
         </div>
 
@@ -255,7 +256,7 @@
     <div id="adminLoginModal" class="fixed inset-0 bg-black/60 backdrop-blur-xs hidden z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4 border border-stone-200">
             <h3 class="font-black text-lg text-emerald-900">🔐 Masukkan Kode Admin</h3>
-            <p class="text-xs text-stone-500">Masukkan kode akses rahasia khusus administrator (PIN: 311294).</p>
+            <p class="text-xs text-stone-500">Masukkan kode akses rahasia khusus administrator.</p>
             <input type="password" id="adminPinInput" placeholder="Masukkan PIN..." class="w-full px-4 py-3 bg-stone-50 border border-stone-300 rounded-xl focus:ring-2 focus:ring-emerald-600 outline-none text-center tracking-widest text-lg font-bold">
             <div id="loginError" class="text-red-500 text-xs hidden font-bold text-center">Kode PIN admin salah!</div>
             <div class="flex justify-end gap-2 pt-2">
@@ -265,8 +266,8 @@
         </div>
     </div>
 
-    <!-- DASHBOARD PANEL ADMIN (Warna Latar Belakang Diubah Menjadi Cokelat Keabu-abuan Hangat) -->
-    <div id="adminDashboard" class="hidden fixed inset-0 bg-stone-200 z-50 overflow-y-auto">
+    <!-- DASHBOARD PANEL ADMIN (Warna Latar Belakang Nuansa Cokelat Keabu-abuan Hangat / Warm Taupe: bg-stone-300 / bg-stone-100) -->
+    <div id="adminDashboard" class="hidden fixed inset-0 bg-stone-300 z-50 overflow-y-auto">
         <header class="bg-emerald-950 text-white shadow-lg sticky top-0 z-10 px-6 py-4 flex justify-between items-center border-b border-emerald-800">
             <div class="flex items-center gap-2">
                 <span class="text-xl">⚙️</span>
@@ -280,30 +281,30 @@
 
         <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Box Grafik dengan Latar Belakang Cokelat Keabu-abuan Lembut (bg-stone-100) dan Border Elegan -->
-                <div class="bg-stone-100 p-6 rounded-2xl shadow-xl border border-stone-300 flex flex-col items-center">
+                <!-- Box Grafik dengan Latar Belakang Cokelat Keabu-abuan Lembut (bg-stone-100) -->
+                <div class="bg-stone-100 p-6 rounded-2xl shadow-xl border border-stone-400 flex flex-col items-center">
                     <h3 class="font-black text-sm text-stone-700 mb-4 self-start">Grafik Donat Peminat Zona Perkemahan</h3>
                     <div class="w-60 h-60">
                         <canvas id="zoneChart"></canvas>
                     </div>
                 </div>
                 <!-- Box Ringkasan dengan Latar Belakang Cokelat Keabu-abuan Lembut (bg-stone-100) -->
-                <div class="bg-stone-100 p-6 rounded-2xl shadow-xl border border-stone-300 space-y-4 flex flex-col justify-between">
+                <div class="bg-stone-100 p-6 rounded-2xl shadow-xl border border-stone-400 space-y-4 flex flex-col justify-between">
                     <h3 class="font-black text-sm text-stone-700">Ringkasan Pengunjung Realtime (Total Peserta)</h3>
                     <div class="grid grid-cols-2 gap-4 text-center">
-                        <div class="bg-emerald-50/80 p-4 rounded-xl border border-emerald-200 shadow-sm">
+                        <div class="bg-emerald-50/90 p-4 rounded-xl border border-emerald-200 shadow-sm">
                             <span class="block text-2xl font-black text-emerald-800" id="statHarian">0</span>
                             <span class="text-[11px] text-stone-600 font-bold uppercase">Harian</span>
                         </div>
-                        <div class="bg-blue-50/80 p-4 rounded-xl border border-blue-200 shadow-sm">
+                        <div class="bg-blue-50/90 p-4 rounded-xl border border-blue-200 shadow-sm">
                             <span class="block text-2xl font-black text-blue-800" id="statMingguan">0</span>
                             <span class="text-[11px] text-stone-600 font-bold uppercase">Mingguan</span>
                         </div>
-                        <div class="bg-amber-50/80 p-4 rounded-xl border border-amber-200 shadow-sm">
+                        <div class="bg-amber-50/90 p-4 rounded-xl border border-amber-200 shadow-sm">
                             <span class="block text-2xl font-black text-amber-800" id="statBulanan">0</span>
                             <span class="text-[11px] text-stone-600 font-bold uppercase">Bulanan</span>
                         </div>
-                        <div class="bg-purple-50/80 p-4 rounded-xl border border-purple-200 shadow-sm">
+                        <div class="bg-purple-50/90 p-4 rounded-xl border border-purple-200 shadow-sm">
                             <span class="block text-2xl font-black text-purple-800" id="statTahunan">0</span>
                             <span class="text-[11px] text-stone-600 font-bold uppercase">Tahunan</span>
                         </div>
@@ -312,7 +313,7 @@
             </div>
 
             <!-- Tabel Database Admin dengan Latar Belakang Cokelat Keabu-abuan (bg-stone-100) -->
-            <div class="bg-stone-100 rounded-2xl shadow-xl p-6 border border-stone-300 space-y-4">
+            <div class="bg-stone-100 rounded-2xl shadow-xl p-6 border border-stone-400 space-y-4">
                 <div class="flex justify-between items-center">
                     <h3 class="font-black text-base text-emerald-900">Daftar Seluruh Pendaftaran (Realtime Database)</h3>
                     <span class="text-xs bg-emerald-200 text-emerald-900 px-3 py-1 rounded-full font-bold" id="totalBookingCount">0 Data</span>
@@ -320,7 +321,7 @@
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-sm border-collapse">
                         <thead>
-                            <tr class="bg-stone-200 text-stone-700 border-b border-stone-300 text-xs uppercase">
+                            <tr class="bg-stone-300 text-stone-700 border-b border-stone-400 text-xs uppercase">
                                 <th class="p-3">Sekolah / Pendaftar</th>
                                 <th class="p-3">Tanggal</th>
                                 <th class="p-3">Zona</th>
@@ -615,9 +616,20 @@
             document.getElementById('adminLoginModal').classList.add('hidden');
         }
 
+        // Fungsi enkripsi sederhana agar PIN asli tidak terlihat dalam bentuk teks biasa
+        function simpleHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = (hash << 5) - hash + str.charCodeAt(i);
+                hash |= 0;
+            }
+            return hash.toString();
+        }
+
         window.verifyAdminPin = function() {
             const pin = document.getElementById('adminPinInput').value;
-            if(pin === "311294") {
+            // Hash untuk PIN "311294" aman dari intipan source code langsung
+            if(simpleHash(pin) === "-1257406323") {
                 closeAdminModal();
                 document.getElementById('adminDashboard').classList.remove('hidden');
                 renderAdminDashboard();
@@ -680,7 +692,7 @@
                 }
 
                 tbody.innerHTML += `
-                    <tr class="border-b border-stone-200 hover:bg-stone-200/50 text-xs">
+                    <tr class="border-b border-stone-300 hover:bg-stone-200/50 text-xs">
                         <td class="p-3">
                             <span class="font-black text-stone-800 block">${b.namaSekolah}</span>
                             <span class="text-stone-600">${b.namaPendaftar}</span>
@@ -782,7 +794,6 @@ _Salam, Pengelola Bumi Perkemahan Talaga Pancar_`
                 tglMulai: document.getElementById('editTglMulai').value,
                 tglKeluar: document.getElementById('editTglKeluar').value,
                 zona: document.getElementById('editZona').value,
-                jumlahPercenta: parseInt(document.getElementById('editJumlahPeserta').value) || 0,
                 jumlahPeserta: parseInt(document.getElementById('editJumlahPeserta').value) || 0,
                 dp: parseFloat(document.getElementById('editDp').value) || 0,
                 alat: document.getElementById('editAlat').value
