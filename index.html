@@ -23,16 +23,16 @@
     <header class="bg-emerald-900 text-white shadow-lg sticky top-0 z-50 border-b-4 border-emerald-700">
         <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
             
-            <!-- Sudut Kiri: Logo KTH Talaga Pancar & Judul Buper -->
+            <!-- Sudut Kiri: Logo Talaga Pancar & Judul Buper (Sejajar) -->
             <div class="flex items-center gap-3 bg-emerald-950/80 px-5 py-2.5 rounded-2xl border border-emerald-800 shadow-inner w-full md:w-auto justify-between md:justify-start">
-                <img src="https://lh3.googleusercontent.com/d/1q-E1KnEgMJJEl6dgLWa6ydDyD01mbUj9=s220" alt="Logo KTH Talaga Pancar" class="w-14 h-14 object-contain bg-white rounded-2xl p-1.5 shadow-md border-2 border-emerald-600" title="Logo KTH Talaga Pancar">
+                <img src="https://lh3.googleusercontent.com/d/1q-E1KnEgMJJEl6dgLWa6ydDyD01mbUj9=s220" alt="Logo Talaga Pancar" class="w-14 h-14 object-contain bg-white rounded-2xl p-1.5 shadow-md border-2 border-emerald-600" title="Logo Talaga Pancar">
                 <div class="text-left">
                     <h1 class="text-xl sm:text-2xl font-black tracking-wide">BUPER TALAGA PANCAR</h1>
                     <p class="text-xs text-emerald-200">Menghubungkan Anak dengan Alam</p>
                 </div>
             </div>
 
-            <!-- Sudut Kanan: Keterangan Perhutani & Logo Perhutani -->
+            <!-- Sudut Kanan: Keterangan Perhutani & Logo Perhutani (Sejajar) -->
             <div class="flex items-center gap-3 bg-emerald-950/80 px-5 py-2.5 rounded-2xl border border-emerald-800 shadow-inner w-full md:w-auto justify-between md:justify-end">
                 <div class="text-right">
                     <p class="text-[10px] text-emerald-300 font-bold uppercase tracking-wider">Didukung Oleh:</p>
@@ -305,19 +305,49 @@
                 </div>
             </div>
 
-            <!-- TABEL DATABASE PENDAFTARAN -->
+            <!-- TABEL DATABASE PENDAFTARAN DENGAN FILTER ZONA & BULAN -->
             <div class="bg-stone-100 rounded-2xl shadow-xl p-6 border border-stone-400 space-y-4">
-                <div class="flex justify-between items-center">
-                    <h3 class="font-black text-base text-emerald-900">Daftar Seluruh Pendaftaran (Realtime Database)</h3>
-                    <span class="text-xs bg-emerald-200 text-emerald-900 px-3 py-1 rounded-full font-bold" id="totalBookingCount">0 Data</span>
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 border-b pb-4">
+                    <div>
+                        <h3 class="font-black text-base text-emerald-900">Kelompok Data Pendaftaran (Database)</h3>
+                        <p class="text-xs text-stone-500">Filter berdasarkan Zona dan Bulan untuk memudahkan pengecekan.</p>
+                    </div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <!-- Filter Zona Admin -->
+                        <select id="adminFilterZona" onchange="renderAdminDashboard()" class="px-3 py-2 bg-white border border-stone-300 rounded-xl text-xs font-bold text-emerald-900 focus:ring-2 focus:ring-emerald-600 outline-none shadow-xs">
+                            <option value="ALL">🌲 Semua Zona</option>
+                            <option value="ZONA A">ZONA A</option>
+                            <option value="ZONA B">ZONA B</option>
+                            <option value="ZONA C">ZONA C</option>
+                            <option value="ZONA D(wisata)">ZONA D (Wisata)</option>
+                        </select>
+                        <!-- Filter Bulan Admin -->
+                        <select id="adminFilterBulan" onchange="renderAdminDashboard()" class="px-3 py-2 bg-white border border-stone-300 rounded-xl text-xs font-bold text-emerald-900 focus:ring-2 focus:ring-emerald-600 outline-none shadow-xs">
+                            <option value="ALL">📅 Semua Bulan</option>
+                            <option value="01">Januari</option>
+                            <option value="02">Februari</option>
+                            <option value="03">Maret</option>
+                            <option value="04">April</option>
+                            <option value="05">Mei</option>
+                            <option value="06">Juni</option>
+                            <option value="07">Juli</option>
+                            <option value="08">Agustus</option>
+                            <option value="09">September</option>
+                            <option value="10">Oktober</option>
+                            <option value="11">November</option>
+                            <option value="12">Desember</option>
+                        </select>
+                        <span class="text-xs bg-emerald-200 text-emerald-900 px-3 py-2 rounded-xl font-bold" id="totalBookingCount">0 Data</span>
+                    </div>
                 </div>
+
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-sm border-collapse">
                         <thead>
                             <tr class="bg-stone-300 text-stone-700 border-b border-stone-400 text-xs uppercase">
                                 <th class="p-3">Sekolah / Pendaftar</th>
-                                <th class="p-3">Tanggal</th>
-                                <th class="p-3">Zona</th>
+                                <th class="p-3">Tanggal Check-in</th>
+                                <th class="p-3">Zona Pilihan</th>
                                 <th class="p-3">Peserta & DP</th>
                                 <th class="p-3">Kontak & Alat</th>
                                 <th class="p-3 text-center">Aksi</th>
@@ -635,14 +665,11 @@
             tbody.innerHTML = "";
             const countEl = document.getElementById('totalBookingCount');
 
-            const keys = Object.keys(globalBookings);
-            countEl.textContent = `${keys.length} Data`;
+            const filterZona = document.getElementById('adminFilterZona').value;
+            const filterBulan = document.getElementById('adminFilterBulan').value;
 
-            if(keys.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-stone-500">Belum ada data pendaftaran.</td></tr>`;
-                updateCharts({ "ZONA A": 0, "ZONA B": 0, "ZONA C": 0, "ZONA D(wisata)": 0 }, {});
-                return;
-            }
+            const keys = Object.keys(globalBookings);
+            let displayedCount = 0;
 
             let zoneCounts = { "ZONA A": 0, "ZONA B": 0, "ZONA C": 0, "ZONA D(wisata)": 0 };
             let schoolParticipantMap = {};
@@ -693,6 +720,18 @@
                     }
                 }
 
+                // FILTERING BERDASARKAN ZONA & BULAN UNTUK TABEL ADMIN
+                if(b.tglMulai) {
+                    const bMonth = b.tglMulai.split('-')[1]; // Format YYYY-MM-DD -> MM
+                    if(filterBulan !== 'ALL' && bMonth !== filterBulan) return;
+                }
+
+                if(b.zona && filterZona !== 'ALL') {
+                    const zonesArray = b.zona.split(',').map(z => z.trim());
+                    if(!zonesArray.includes(filterZona)) return;
+                }
+
+                displayedCount++;
                 tbody.innerHTML += `
                     <tr class="border-b border-stone-300 hover:bg-stone-200/50 text-xs">
                         <td class="p-3">
@@ -717,6 +756,12 @@
                     </tr>
                 `;
             });
+
+            countEl.textContent = `${displayedCount} Data Ditampilkan`;
+
+            if(displayedCount === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-stone-500">Tidak ada data pendaftaran yang sesuai dengan filter zona dan bulan tersebut.</td></tr>`;
+            }
 
             document.getElementById('statHarian').textContent = statHarianVal;
             document.getElementById('statMingguan').textContent = statMingguanVal;
