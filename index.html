@@ -29,6 +29,24 @@
                     <p class="text-xs text-emerald-200">Menghubungkan Anak dengan Alam Melalui Camping</p>
                 </div>
             </div>
+
+            <!-- Logo Perhutani & KTH Talaga Pancar di Kanan Atas -->
+            <div class="flex items-center gap-3 bg-emerald-950/80 px-4 py-2 rounded-2xl border border-emerald-800 shadow-inner">
+                <div class="text-right">
+                    <p class="text-[10px] text-emerald-300 font-bold uppercase tracking-wider">Didukung Oleh:</p>
+                    <p class="text-xs font-black text-white">Perhutani & KTH Talaga Pancar</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <!-- Logo Perhutani -->
+                    <img src="https://lh3.googleusercontent.com/d/1aTBkfNc3qK_cX6ydJk-BulZCY7gHSiRU=s220" alt="Logo Perhutani" class="w-10 h-10 object-contain bg-white rounded-xl p-1 shadow border border-emerald-700" title="Logo Perhutani">
+                    <!-- Logo KTH Talaga Pancar -->
+                    <img src="https://lh3.googleusercontent.com/d/1q-E1KnEgMJJEl6dgLWa6ydDyD01mbUj9=s220" alt="Logo KTH Talaga Pancar" class="w-10 h-10 object-contain bg-white rounded-xl p-1 shadow border border-emerald-700" title="Logo KTH Talaga Pancar">
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Menu Navigasi -->
+        <div class="max-w-7xl mx-auto px-4 pb-3 flex justify-center md:justify-end">
             <nav class="flex gap-2 bg-emerald-950 p-1.5 rounded-xl border border-emerald-800 shadow-inner">
                 <button onclick="switchTab('form')" id="nav-form" class="px-4 py-2 rounded-lg font-bold text-sm transition bg-emerald-700 text-white shadow">Form & Brosur</button>
                 <button onclick="switchTab('calendar')" id="nav-calendar" class="px-4 py-2 rounded-lg font-bold text-sm transition text-emerald-200 hover:text-white">Kalender Jadwal</button>
@@ -247,8 +265,8 @@
         </div>
     </div>
 
-    <!-- DASHBOARD PANEL ADMIN -->
-    <div id="adminDashboard" class="hidden fixed inset-0 bg-stone-100 z-50 overflow-y-auto">
+    <!-- DASHBOARD PANEL ADMIN (Warna Latar Belakang Diubah Menjadi Cokelat Keabu-abuan Hangat) -->
+    <div id="adminDashboard" class="hidden fixed inset-0 bg-stone-200 z-50 overflow-y-auto">
         <header class="bg-emerald-950 text-white shadow-lg sticky top-0 z-10 px-6 py-4 flex justify-between items-center border-b border-emerald-800">
             <div class="flex items-center gap-2">
                 <span class="text-xl">⚙️</span>
@@ -262,44 +280,47 @@
 
         <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-2xl shadow-xl border border-stone-200 flex flex-col items-center">
+                <!-- Box Grafik dengan Latar Belakang Cokelat Keabu-abuan Lembut (bg-stone-100) dan Border Elegan -->
+                <div class="bg-stone-100 p-6 rounded-2xl shadow-xl border border-stone-300 flex flex-col items-center">
                     <h3 class="font-black text-sm text-stone-700 mb-4 self-start">Grafik Donat Peminat Zona Perkemahan</h3>
                     <div class="w-60 h-60">
                         <canvas id="zoneChart"></canvas>
                     </div>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-xl border border-stone-200 space-y-4 flex flex-col justify-between">
+                <!-- Box Ringkasan dengan Latar Belakang Cokelat Keabu-abuan Lembut (bg-stone-100) -->
+                <div class="bg-stone-100 p-6 rounded-2xl shadow-xl border border-stone-300 space-y-4 flex flex-col justify-between">
                     <h3 class="font-black text-sm text-stone-700">Ringkasan Pengunjung Realtime (Total Peserta)</h3>
                     <div class="grid grid-cols-2 gap-4 text-center">
-                        <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 shadow-sm">
+                        <div class="bg-emerald-50/80 p-4 rounded-xl border border-emerald-200 shadow-sm">
                             <span class="block text-2xl font-black text-emerald-800" id="statHarian">0</span>
-                            <span class="text-[11px] text-stone-500 font-bold uppercase">Harian</span>
+                            <span class="text-[11px] text-stone-600 font-bold uppercase">Harian</span>
                         </div>
-                        <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 shadow-sm">
+                        <div class="bg-blue-50/80 p-4 rounded-xl border border-blue-200 shadow-sm">
                             <span class="block text-2xl font-black text-blue-800" id="statMingguan">0</span>
-                            <span class="text-[11px] text-stone-500 font-bold uppercase">Mingguan</span>
+                            <span class="text-[11px] text-stone-600 font-bold uppercase">Mingguan</span>
                         </div>
-                        <div class="bg-amber-50 p-4 rounded-xl border border-amber-100 shadow-sm">
+                        <div class="bg-amber-50/80 p-4 rounded-xl border border-amber-200 shadow-sm">
                             <span class="block text-2xl font-black text-amber-800" id="statBulanan">0</span>
-                            <span class="text-[11px] text-stone-500 font-bold uppercase">Bulanan</span>
+                            <span class="text-[11px] text-stone-600 font-bold uppercase">Bulanan</span>
                         </div>
-                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-100 shadow-sm">
+                        <div class="bg-purple-50/80 p-4 rounded-xl border border-purple-200 shadow-sm">
                             <span class="block text-2xl font-black text-purple-800" id="statTahunan">0</span>
-                            <span class="text-[11px] text-stone-500 font-bold uppercase">Tahunan</span>
+                            <span class="text-[11px] text-stone-600 font-bold uppercase">Tahunan</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white rounded-2xl shadow-xl p-6 border border-stone-200 space-y-4">
+            <!-- Tabel Database Admin dengan Latar Belakang Cokelat Keabu-abuan (bg-stone-100) -->
+            <div class="bg-stone-100 rounded-2xl shadow-xl p-6 border border-stone-300 space-y-4">
                 <div class="flex justify-between items-center">
                     <h3 class="font-black text-base text-emerald-900">Daftar Seluruh Pendaftaran (Realtime Database)</h3>
-                    <span class="text-xs bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full font-bold" id="totalBookingCount">0 Data</span>
+                    <span class="text-xs bg-emerald-200 text-emerald-900 px-3 py-1 rounded-full font-bold" id="totalBookingCount">0 Data</span>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-sm border-collapse">
                         <thead>
-                            <tr class="bg-stone-50 text-stone-700 border-b text-xs uppercase">
+                            <tr class="bg-stone-200 text-stone-700 border-b border-stone-300 text-xs uppercase">
                                 <th class="p-3">Sekolah / Pendaftar</th>
                                 <th class="p-3">Tanggal</th>
                                 <th class="p-3">Zona</th>
@@ -309,7 +330,7 @@
                             </tr>
                         </thead>
                         <tbody id="adminTableBody">
-                            <tr><td colspan="6" class="p-4 text-center text-stone-400">Memuat data dari database...</td></tr>
+                            <tr><td colspan="6" class="p-4 text-center text-stone-500">Memuat data dari database...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -618,7 +639,7 @@
             countEl.textContent = `${keys.length} Data`;
 
             if(keys.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-stone-400">Belum ada data pendaftaran.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-stone-500">Belum ada data pendaftaran.</td></tr>`;
                 updateDonutChart({ "ZONA A": 0, "ZONA B": 0, "ZONA C": 0, "ZONA D(wisata)": 0 });
                 return;
             }
@@ -658,20 +679,19 @@
                     }
                 }
 
-                // PERBAIKAN: Tombol WhatsApp mengirim template format konfirmasi reservasi
                 tbody.innerHTML += `
-                    <tr class="border-b hover:bg-stone-50 text-xs">
+                    <tr class="border-b border-stone-200 hover:bg-stone-200/50 text-xs">
                         <td class="p-3">
                             <span class="font-black text-stone-800 block">${b.namaSekolah}</span>
-                            <span class="text-stone-500">${b.namaPendaftar}</span>
+                            <span class="text-stone-600">${b.namaPendaftar}</span>
                         </td>
-                        <td class="p-3">${b.tglMulai} s/d ${b.tglKeluar}</td>
+                        <td class="p-3 text-stone-700">${b.tglMulai} s/d ${b.tglKeluar}</td>
                         <td class="p-3 font-bold text-emerald-800">${b.zona}</td>
-                        <td class="p-3">
+                        <td class="p-3 text-stone-700">
                             ${b.jumlahPeserta} Orang<br>
                             <span class="text-stone-500">DP: Rp ${Number(b.dp || 0).toLocaleString()}</span>
                         </td>
-                        <td class="p-3">
+                        <td class="p-3 text-stone-700">
                             ${b.noTelepon}<br>
                             <span class="text-stone-500">Alat: ${b.alat}</span>
                         </td>
@@ -700,7 +720,6 @@
             let cleanPhone = phone.replace(/\D/g,'');
             if(cleanPhone.startsWith('0')) cleanPhone = '62' + cleanPhone.slice(1);
 
-            // Membuat format pesan persis seperti contoh yang diminta
             const message = encodeURIComponent(
 `*KONFIRMASI RESERVASI BUPER TALAGA PANCAR* 🌲
 
@@ -763,6 +782,7 @@ _Salam, Pengelola Bumi Perkemahan Talaga Pancar_`
                 tglMulai: document.getElementById('editTglMulai').value,
                 tglKeluar: document.getElementById('editTglKeluar').value,
                 zona: document.getElementById('editZona').value,
+                jumlahPercenta: parseInt(document.getElementById('editJumlahPeserta').value) || 0,
                 jumlahPeserta: parseInt(document.getElementById('editJumlahPeserta').value) || 0,
                 dp: parseFloat(document.getElementById('editDp').value) || 0,
                 alat: document.getElementById('editAlat').value
