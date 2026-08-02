@@ -488,9 +488,12 @@
         const bookingsRef = ref(db, 'bookings');
         onValue(bookingsRef, (snapshot) => {
             const data = snapshot.val();
-            globalBookings = data || {};
+            // PERBAIKAN: Mengatasi nilai null pada database agar tidak crash
+            globalBookings = data ? data : {};
             renderCalendar();
             renderAdminDashboard();
+        }, (error) => {
+            console.error("Gagal membaca database Firebase:", error);
         });
 
         window.changeMonth = function(direction) {
@@ -537,6 +540,7 @@
 
                 for(let id in globalBookings) {
                     const b = globalBookings[id];
+                    if(!b || !b.zona) continue;
                     
                     if(selectedZoneFilter !== 'ALL') {
                         const zonesArray = b.zona.split(',').map(z => z.trim());
@@ -635,13 +639,16 @@
 
             keys.forEach(id => {
                 const b = globalBookings[id];
+                if(!b) return;
                 
-                b.zona.split(',').forEach(z => {
-                    let cleanedZ = z.trim();
-                    if(zoneCounts[cleanedZ] !== undefined) {
-                        zoneCounts[cleanedZ] += parseInt(b.jumlahPeserta) || 0;
-                    }
-                });
+                if(b.zona) {
+                    b.zona.split(',').forEach(z => {
+                        let cleanedZ = z.trim();
+                        if(zoneCounts[cleanedZ] !== undefined) {
+                            zoneCounts[cleanedZ] += parseInt(b.jumlahPeserta) || 0;
+                        }
+                    });
+                }
 
                 const startDate = new Date(b.tglMulai);
                 if(!isNaN(startDate)) {
